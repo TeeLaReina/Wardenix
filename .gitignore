@@ -23,5 +23,8 @@ Thumbs.db
 __pycache__/
 *.pyc
 
+venv/
+.venv/
+env/
 wazuh-data/
 grafana-data/
