@@ -25,7 +25,7 @@ Identity is the most common initial access vector in modern breaches, and most o
 | Multi-engine detection correlation (cloud + endpoint + network) | Security Analysis |
 | SOAR playbook design and AI-assisted triage | DevSecOps |
 | Secure scripting and CI-gated automation | DevSecOps |
-| Threat modelling (STRIDE + ATT&CK across four domains) | Sec.Eng & Sec.Ana |
+| Threat modelling (STRIDE + ATT&CK across four domains) | Both |
 
 ## Architecture
 
