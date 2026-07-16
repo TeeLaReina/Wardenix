@@ -1,0 +1,18 @@
+flowchart TD
+    Entra["Microsoft Entra ID"] -->|logs| LogAnalytics["Log Analytics"]
+    Entra -->|device trust| Endpoint["Tiny10 endpoint"]
+    Attacker(["Metasploit"]) -.-> Endpoint
+    Endpoint --> WazuhAgent["Wazuh agent"]
+    WazuhAgent --> WazuhManager["Wazuh manager"]
+    RADIUS["NPS/RADIUS"] --> Suricata["Suricata"]
+    Attacker -.-> RADIUS
+    WazuhManager --> Grafana["Grafana Cloud"]
+    Suricata --> Grafana
+    LogAnalytics --> Grafana
+    LogAnalytics --> Workbooks["Azure Monitor Workbooks"]
+    Detections["Sigma + KQL"] --> Grafana
+    Grafana --> Shuffle["Shuffle SOAR"]
+    Grafana --> Slack["Slack"]
+    Shuffle --> Entra
+    Shuffle --> AITriage["AI triage"]
+    AITriage --> Report["Incident report"]
