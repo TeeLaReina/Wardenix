@@ -55,6 +55,7 @@ Every control traces back to an identified threat, across identity, endpoint, ne
 | Detection-as-code | Sigma, KQL |
 | Log pipeline | Azure Log Analytics, Grafana Cloud, Azure Monitor Workbooks |
 | SOAR | Shuffle (self-hosted) |
+| Alerting & notifications | Slack (via Grafana Alerting) |
 | AI-assisted triage | Google Gemini API |
 | Infrastructure-as-Code | OpenTofu |
 | Automation & CI | GitHub Actions, Python, PowerShell |
