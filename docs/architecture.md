@@ -34,7 +34,7 @@ flowchart TD
     classDef analyst fill:#3f1f5f,stroke:#9b59b6,color:#fff;
     classDef threat fill:#5f1f1f,stroke:#e74c3c,color:#fff;
     class Entra,Endpoint,WazuhAgent,WazuhManager,RADIUS,Suricata engineer;
-    class LogAnalytics,Grafana,Detections,Workbooks,Shuffle,AITriage,Report analyst,Slack;
+    class LogAnalytics,Grafana,Detections,Workbooks,Shuffle,AITriage,Report,Slack analyst;
     class Attacker threat;
 ```
 
