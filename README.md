@@ -71,7 +71,11 @@ Every VM in this project runs on isolated virtual networking with no path back t
 #### Phase 1 - 26 users and 11 dynamic groups, provisioned entirely via Microsoft Graph API
 
 ![26 users provisioned via Graph API script](docs/screenshots/phase-1-users-provisioned.png)
-- [ ] **Phase 2 - Endpoint:** isolated provisioning, Wazuh agent, Entra device registration
+- [x] **Phase 2 — Endpoint:** isolated provisioning, Entra device registration (Wazuh agent deferred to Phase 3 — requires a live manager to connect to)
+
+#### Phase 2 — Isolated endpoint, verified network boundaries, cloud-trust registered
+
+![Device registered as Microsoft Entra joined, owned by Wale Ibrahim](docs/screenshots/phase-2-entra-device-joined.png)
 - [ ] **Phase 3 - Network Security Architecture:** management infrastructure, firewall design
 - [ ] **Phase 4 - Attack, Risk Assessment & Hardening:** baseline compromise, risk register, remediation, re-test
 - [ ] **Phase 5 - Baseline Protection:** Security Defaults across the free tier
