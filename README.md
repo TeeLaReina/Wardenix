@@ -66,8 +66,11 @@ Every VM in this project runs on isolated virtual networking with no path back t
 
 ## Roadmap
 
-- [ ] **Phase 0 - Foundation:** threat model, architecture, organization design
-- [ ] **Phase 1 - Identity Engineering:** users, groups, and governance as code
+- [x] **Phase 0 - Foundation:** threat model, architecture, organization design
+- [x] **Phase 1 - Identity Engineering:** users, groups, and governance as code
+#### Phase 1 - 26 users and 11 dynamic groups, provisioned entirely via Microsoft Graph API
+
+![26 users provisioned via Graph API script](docs/screenshots/phase-1-users-provisioned.png)
 - [ ] **Phase 2 - Endpoint:** isolated provisioning, Wazuh agent, Entra device registration
 - [ ] **Phase 3 - Network Security Architecture:** management infrastructure, firewall design
 - [ ] **Phase 4 - Attack, Risk Assessment & Hardening:** baseline compromise, risk register, remediation, re-test
