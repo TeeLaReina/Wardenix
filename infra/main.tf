@@ -44,6 +44,14 @@ resource "digitalocean_firewall" "management" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
+  # Wazuh agent enrollment — separate from 1514, required once per agent
+  # to receive its client key before any data can flow.
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "1515"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
   # Shuffle's web interface, for building and viewing SOAR playbooks.
   inbound_rule {
     protocol         = "tcp"
