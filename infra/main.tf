@@ -55,7 +55,7 @@ resource "digitalocean_firewall" "management" {
   # Shuffle's web interface, for building and viewing SOAR playbooks.
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "3001"
+    port_range       = "3443"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
