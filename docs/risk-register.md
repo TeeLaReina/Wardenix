@@ -47,6 +47,16 @@ This register documents every security finding produced by the controlled attack
 | **Hardening control** | Restrict local account privileges; review and remove unnecessary local admin membership; apply Windows Updates to patch named-pipe impersonation vulnerabilities |
 | **Re-test required** | Yes - `getsystem` on a post-hardening session |
 
+RISK-02 — Post-hardening update (13 Aug 2026)
+
+Status: Remediated
+
+Re-test finding: With tee removed from the local Administrators group, getsystem failed across all six techniques (error 1346 — insufficient privilege). Named Pipe Impersonation, which succeeded in the baseline test, was blocked at the privilege-check stage because tee no longer holds a token that can be impersonated to SYSTEM. The Meterpreter session remained constrained to DESKTOP-K8PDBGH\tee (standard user) throughout.
+
+Evidence: phase-4-tee-posthardening-getsystem-hashdump-failed.png
+
+Residual risk: None. Privilege escalation via this vector requires local admin context.
+
 ---
 
 ### RISK-03 - Full credential dump from SAM database
@@ -60,6 +70,16 @@ This register documents every security finding produced by the controlled attack
 | **Evidence** | `phase-4-tee-meterpreter-sysinfo-getsystem-hashdump.png` |
 | **Hardening control** | Enable Credential Guard where supported; enforce unique, strong local account passwords; disable or rename the built-in Administrator account |
 | **Re-test required** | Yes - `hashdump` on a post-hardening session |
+
+RISK-03 — Post-hardening update (13 Aug 2026)
+
+Status: Remediated
+
+Re-test finding: hashdump failed (error 1168 — element not found). Without SYSTEM or administrator-level token, the SAM database is inaccessible. Credential extraction via this technique is no longer possible from tee's session.
+
+Evidence: phase-4-tee-posthardening-getsystem-hashdump-failed.png (same screenshot covers both — hashdump output is on the same frame)
+
+Residual risk: None from this session context. If any local admin account is compromised, the SAM remains reachable — covered as an accepted infrastructure design note since wardenix-admin is the sole remaining local admin.
 
 ---
 
