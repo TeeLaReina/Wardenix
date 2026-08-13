@@ -130,7 +130,18 @@ Attacked the unhardened endpoint, formally risk-registered every finding, harden
 
 **Re-test:** same payload re-run post-hardening against both accounts. Results and updated screenshots committed.
 
-- [ ] **Phase 5 - Baseline Protection:** Security Defaults across the free tier
+- [x] **Phase 5 - Baseline Protection:** Security Defaults across the free tier
+
+#### Phase 5 — Baseline protection: Security Defaults
+
+![Security Defaults enabled on Wardenix tenant](docs/screenshots/phase-5-security-defaults-enabled.png)
+
+Confirmed and documented the free-tier identity baseline active across all 26 accounts.
+
+- Security Defaults was enabled automatically by Microsoft at tenant creation (confirmed August 2026)
+- Enforces: MFA registration for all users, mandatory admin MFA, risk-based user MFA challenges, legacy authentication blocked, device code flow blocked
+- Documented Security Defaults vs. Conditional Access trade-offs — Security Defaults is the correct free-tier tool; Phase 6 replaces it with granular CA policies for the 6 P2-licensed accounts
+
 - [ ] **Phase 6 - Conditional Access Engineering:** tiered policy design
 - [ ] **Phase 7 - Privileged Identity Management:** eligible roles, approval workflow
 - [ ] **Phase 8 - Identity Protection:** risk detection and investigation
@@ -145,3 +156,13 @@ Setup steps are added per phase.
 ---
 
 *Maintained as a portfolio project demonstrating identity, endpoint, and network security engineering, analysis, and automation.*
+
+#### Phase 5 — Baseline protection: Security Defaults
+
+![Security Defaults enabled on Wardenix tenant](docs/screenshots/phase-5-security-defaults-enabled.png)
+
+Confirmed and documented the free-tier identity baseline active across all 26 accounts.
+
+- Security Defaults was enabled automatically by Microsoft at tenant creation (confirmed August 2026)
+- Enforces: MFA registration for all users, mandatory admin MFA, risk-based user MFA challenges, legacy authentication blocked, device code flow blocked
+- Documented Security Defaults vs. Conditional Access trade-offs — Security Defaults is the correct free-tier tool; Phase 6 replaces it with granular CA policies for the 6 P2-licensed accounts
