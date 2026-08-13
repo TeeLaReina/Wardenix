@@ -76,8 +76,60 @@ Every VM in this project runs on isolated virtual networking with no path back t
 #### Phase 2 — Isolated endpoint, verified network boundaries, cloud-trust registered
 
 ![Device registered as Microsoft Entra joined, owned by Wale Ibrahim](docs/screenshots/phase-2-entra-device-joined.png)
-- [ ] **Phase 3 - Network Security Architecture:** management infrastructure, firewall design
-- [ ] **Phase 4 - Attack, Risk Assessment & Hardening:** baseline compromise, risk register, remediation, re-test
+- [x] **Phase 3 - Network Security Architecture:** management infrastructure, firewall design
+
+#### Phase 3 — Management infrastructure, network detection, and SOAR
+
+![Wale Ibrahim's endpoint active in Wazuh dashboard](docs/screenshots/phase-3-wazuh-endpoint-active.png)
+
+Built the cloud management infrastructure — the detection and response platform
+everything in Phase 4 reports into.
+
+- Management droplet provisioned via OpenTofu on DigitalOcean (Frankfurt, s-2vcpu-4gb, Ubuntu 24.04)
+- Cloud firewall built rule-by-rule: SSH (22), Wazuh agent data (1514), enrollment (1515), dashboard (443), Shuffle SOAR (3443)
+- **Wazuh 4.14.6** (manager, indexer, dashboard) — Wale Ibrahim's endpoint confirmed active
+- Critical fix documented: port 1515 (enrollment) was initially missing — agent started locally but never registered; added and verified
+- **Suricata 8.0.6** installed from OISF PPA — HOME_NET corrected from private-LAN default to actual droplet IPs; 52,058 Emerging Threats Open rules loaded; alerting verified via testmyids.com
+- **FreeRADIUS 3.2.5** — test user authenticating; real RADIUS traffic captured and analyzed in Wireshark
+- **Shuffle SOAR** (self-hosted via Docker) — survived a hard OpenSearch bootstrap bug where the password hash was not written despite a success message; fixed by bypassing the broken installer and writing the hash directly via securityadmin.sh
+- Configuration docs committed: `infra/suricata-configuration.md`, `infra/freeradius-configuration.md`, `infra/shuffle-configuration.md`
+
+- [x] **Phase 4 - Attack, Risk Assessment & Hardening:** baseline compromise, risk register, remediation, re-test
+
+#### Phase 4 — Attack, risk assessment, and hardening
+
+![tee session: SYSTEM via Named Pipe Impersonation, all hashes dumped](docs/screenshots/phase-4-tee-meterpreter-sysinfo-getsystem-hashdump.png)
+![Wale Ibrahim session: getsystem blocked, hashdump blocked](docs/screenshots/phase-4-wale-getsystem-failed-exploit-suggester.png)
+
+Attacked the unhardened endpoint, formally risk-registered every finding, hardened, then re-tested to measure genuine risk reduction. Attack before harden — always.
+
+**Baseline attack sequence:**
+- Static IPs assigned: kalip (attacker) = `10.10.10.10`, endpoint (target) = `10.10.10.20`
+- Payload: `windows/meterpreter/reverse_tcp`, delivered via HTTP and user execution (T1204.002)
+- Two sessions compared:
+  - **`tee` (local account):** `getsystem` succeeded immediately via Named Pipe Impersonation → SYSTEM. All 5 local account hashes dumped. `bypassuac_fodhelper`: already elevated.
+  - **`AzureAD\WaleIbrahim` (Entra standard user):** `getsystem` failed across all 6 techniques. `hashdump` blocked. `bypassuac_fodhelper`: not in admins group. Meaningfully more contained blast radius.
+- 3 CVEs flagged by `local_exploit_suggester`: `ms16_016`, `ms16_032`, `bypassuac_fodhelper`
+
+**Risk register — 7 findings:** `docs/risk-register.md`
+
+| Risk | Severity | Finding |
+|---|---|---|
+| RISK-01 | Critical | No endpoint protection — payload executed silently |
+| RISK-02 | Critical | Local account escalated to SYSTEM immediately |
+| RISK-03 | Critical | All 5 local account hashes dumped from SAM |
+| RISK-04 | High | 3 unpatched local privilege escalation CVEs |
+| RISK-05 | Informational | Entra standard user: privilege escalation blocked (positive) |
+| RISK-06 | High | `tee` account already in elevated state |
+| RISK-07 | Informational | Zero remote-service attack surface (positive) |
+
+**Hardening applied:**
+- Windows Defender real-time protection policy set via registry (Tiny10 has no Defender GUI)
+- Windows Updates applied: KB5120249 + KB5121646 — confirmed up to date
+- `tee` removed from Administrators; `wardenix-admin` created as replacement local admin
+
+**Re-test:** same payload re-run post-hardening against both accounts. Results and updated screenshots committed.
+
 - [ ] **Phase 5 - Baseline Protection:** Security Defaults across the free tier
 - [ ] **Phase 6 - Conditional Access Engineering:** tiered policy design
 - [ ] **Phase 7 - Privileged Identity Management:** eligible roles, approval workflow
