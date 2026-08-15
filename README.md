@@ -188,7 +188,19 @@ Simulated a real attack using Tor Browser, triggered two High-risk detections, i
 - CA-05 (MFA on risky sign-ins) confirmed in scope - would have challenged MFA had sign-in completed
 - Remediation: Confirm user safe in ID Protection, sessions revoked, risk state cleared
 
-- [ ] **Phase 9 - Identity Governance:** Access Reviews, Entitlement Management
+- [x] **Phase 9 - Identity Governance:** Access Reviews, Entitlement Management
+
+#### Phase 9 - Identity Governance
+
+![Wardenix IT Admin access review - quarterly recertification](docs/screenshots/phase-9-access-review-created.png)
+
+Access reviews and entitlement management configured to govern who has access and ensure they still need it.
+
+- Access review: Wardenix-IT-Admin-Access-Review - quarterly recertification of IT Team group membership, 14-day window, auto-remove on no response
+- Access package: IT Admin Access Package - bundles wardenix-provisioning app access, admin-assigned only, 1-year expiry, quarterly access review built in
+- Lifecycle Workflows (Joiner/Mover/Leaver automation) designed but not implemented - requires Entra ID Governance licence above P2; architectural design documented in phase-9-identity-governance.md
+- Licence boundary documented: Entra ID role assignments in access packages also require Governance licence - workaround used enterprise app resource instead
+
 - [ ] **Phase 10 - Log Pipeline & Multi-Engine Analysis:** correlation across all sources
 - [ ] **Phase 11 - SOAR + AI-Assisted Response:** automated playbook, incident narrative
 
