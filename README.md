@@ -159,7 +159,20 @@ Replaced Security Defaults with six scoped CA policies for the 6 P2-licensed acc
 - All policies validated in Report-only mode via What If tool before enabling
 - BreakGlass Admin excluded from every policy
 
-- [ ] **Phase 7 - Privileged Identity Management:** eligible roles, approval workflow
+- [x] **Phase 7 - Privileged Identity Management:** eligible roles, approval workflow
+
+#### Phase 7 - Privileged Identity Management
+
+![PIM eligible assignments - Wale and Mei](docs/screenshots/phase-7-pim-eligible-assignments.png)
+
+Just-in-time privileged access replacing standing admin rights for both IT Admin accounts.
+
+- Wale Ibrahim: Identity Governance Administrator (eligible) - approver: Mei Chen
+- Mei Chen: Cloud Device Administrator (eligible) - approver: Wale Ibrahim
+- Role settings: 1-hour max activation, Azure MFA required, justification required, approval required
+- Activation workflow validated end-to-end: request → MFA → peer approval → time-bound active role
+- Additional finding: CA-06 confirmed blocking sign-in from non-Entra-joined device (AADSTS9001011) - CA-06 set back to Report-only for testing window
+
 - [ ] **Phase 8 - Identity Protection:** risk detection and investigation
 - [ ] **Phase 9 - Identity Governance:** Access Reviews, Entitlement Management
 - [ ] **Phase 10 - Log Pipeline & Multi-Engine Analysis:** correlation across all sources
