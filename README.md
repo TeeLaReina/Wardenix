@@ -142,7 +142,23 @@ Confirmed and documented the free-tier identity baseline active across all 26 ac
 - Enforces: MFA registration for all users, mandatory admin MFA, risk-based user MFA challenges, legacy authentication blocked, device code flow blocked
 - Documented Security Defaults vs. Conditional Access trade-offs — Security Defaults is the correct free-tier tool; Phase 6 replaces it with granular CA policies for the 6 P2-licensed accounts
 
-- [ ] **Phase 6 - Conditional Access Engineering:** tiered policy design
+- [x] **Phase 6 - Conditional Access Engineering:** tiered policy design
+
+#### Phase 6 - Conditional Access Engineering
+
+![All 6 CA policies enabled](docs/screenshots/phase-6-ca-policies-all-enabled.png)
+
+Replaced Security Defaults with six scoped CA policies for the 6 P2-licensed accounts. Free-tier 20 users remain under Security Defaults.
+
+- CA-01: MFA required for IT Admins (Wale, Mei) on all resources
+- CA-02: MFA required for privileged users (David, Sofia, Ama) on all resources
+- CA-03: Legacy authentication blocked - Exchange ActiveSync and Other clients only
+- CA-04: MFA required for all 6 P2 users across all cloud apps
+- CA-05: MFA step-up on medium and high risk sign-ins (P2 Identity Protection signal)
+- CA-06: Entra-joined device required for IT Admin access - enforces DESKTOP-K8PDBGH as the only trusted endpoint
+- All policies validated in Report-only mode via What If tool before enabling
+- BreakGlass Admin excluded from every policy
+
 - [ ] **Phase 7 - Privileged Identity Management:** eligible roles, approval workflow
 - [ ] **Phase 8 - Identity Protection:** risk detection and investigation
 - [ ] **Phase 9 - Identity Governance:** Access Reviews, Entitlement Management
