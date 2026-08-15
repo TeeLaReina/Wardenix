@@ -201,7 +201,19 @@ Access reviews and entitlement management configured to govern who has access an
 - Lifecycle Workflows (Joiner/Mover/Leaver automation) designed but not implemented - requires Entra ID Governance licence above P2; architectural design documented in phase-9-identity-governance.md
 - Licence boundary documented: Entra ID role assignments in access packages also require Governance licence - workaround used enterprise app resource instead
 
-- [ ] **Phase 10 - Log Pipeline & Multi-Engine Analysis:** correlation across all sources
+- [x] **Phase 10 - Log Pipeline & Multi-Engine Analysis:** correlation across all sources
+
+#### Phase 10 - Log Pipeline & Multi-Engine Analysis
+
+![Sign-in pipeline volume - 479 events across 5 hourly buckets](docs/screenshots/phase-10-kql-signin-pipeline-volume.png)
+
+Microsoft Sentinel deployed on Azure Log Analytics, connected to the Defender portal, with Entra ID sign-in telemetry confirmed flowing and queryable via KQL.
+
+- Log Analytics workspace wardenix-sentinel deployed in East US, attached to Defender portal as primary workspace
+- Microsoft Defender XDR connector auto-configured on Defender portal onboarding - includes Entra ID Protection, Defender for Identity, Defender for Endpoint
+- KQL validated: 479 sign-in events in 24h window, spike of 349 events at 23:00 UTC during Phase 6-9 build activity
+- Architectural note: Sentinel deployed after Phase 8 attack simulation - risky sign-in confirmed in Entra ID Protection but predates pipeline; documented as sequencing constraint
+
 - [ ] **Phase 11 - SOAR + AI-Assisted Response:** automated playbook, incident narrative
 
 ## Getting started
