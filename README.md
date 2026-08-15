@@ -173,7 +173,21 @@ Just-in-time privileged access replacing standing admin rights for both IT Admin
 - Activation workflow validated end-to-end: request → MFA → peer approval → time-bound active role
 - Additional finding: CA-06 confirmed blocking sign-in from non-Entra-joined device (AADSTS9001011) - CA-06 set back to Report-only for testing window
 
-- [ ] **Phase 8 - Identity Protection:** risk detection and investigation
+- [x] **Phase 8 - Identity Protection:** risk detection and investigation
+
+#### Phase 8 - Identity Protection: Risk Detection and Investigation
+
+![Risk detections - Anonymous IP and Malicious IP, High severity](docs/screenshots/phase-8-risk-detections-tor.png)
+
+Simulated a real attack using Tor Browser, triggered two High-risk detections, investigated across all ID Protection reports, and remediated.
+
+- Tor Browser sign-in attempt as Wale Ibrahim triggered two simultaneous High-risk detections: Anonymous IP address and Malicious IP address
+- Microsoft threat intelligence identified the Tor exit node as actively malicious - not just anonymous
+- Smart lockout fired before password entry (error 50053) - account locked at network layer
+- Wale flagged in Risky users: At risk, High (3.57% of 26-user org)
+- CA-05 (MFA on risky sign-ins) confirmed in scope - would have challenged MFA had sign-in completed
+- Remediation: Confirm user safe in ID Protection, sessions revoked, risk state cleared
+
 - [ ] **Phase 9 - Identity Governance:** Access Reviews, Entitlement Management
 - [ ] **Phase 10 - Log Pipeline & Multi-Engine Analysis:** correlation across all sources
 - [ ] **Phase 11 - SOAR + AI-Assisted Response:** automated playbook, incident narrative
