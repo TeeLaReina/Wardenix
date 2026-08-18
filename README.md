@@ -199,14 +199,16 @@ Configured risk-based CA, simulated Tor browser attack, investigated detections 
 
 #### Phase 9 - Identity Governance
 
-![Wardenix IT Admin access review - quarterly recertification](docs/screenshots/phase-9-access-review-created.png)
+![Both access reviews - IT Admin quarterly and HR Team monthly](docs/screenshots/phase-9-hr-access-review-created.png)
 
-Access reviews and entitlement management configured to govern who has access and ensure they still need it.
+Recurring oversight layer - access reviews, entitlement management, terms of use, and identity secure score baseline.
 
-- Access review: Wardenix-IT-Admin-Access-Review - quarterly recertification of IT Team group membership, 14-day window, auto-remove on no response
-- Access package: IT Admin Access Package - bundles wardenix-provisioning app access, admin-assigned only, 1-year expiry, quarterly access review built in
-- Lifecycle Workflows (Joiner/Mover/Leaver automation) designed but not implemented - requires Entra ID Governance licence above P2; architectural design documented in phase-9-identity-governance.md
-- Licence boundary documented: Entra ID role assignments in access packages also require Governance licence - workaround used enterprise app resource instead
+- Access Review 1: Wardenix-IT-Admin-Access-Review - IT Team group, quarterly, 14-day window, YetundeDuze as reviewer, auto-remove on no response
+- Access Review 2: Wardenix-HR-Access-Review - HR Team group, monthly, 7-day window, Mei Chen as reviewer (peer review, not self-review), auto-remove on no response
+- Access Package: IT Admin Access Package - wardenix-provisioning app, admin-assigned only, 1-year expiry, quarterly access review built in
+- Terms of Use: Wardenix IT Admin Terms of Use created (5-point acceptable use policy) - attachment to access package blocked by Entra ID Governance licence requirement; documented as design decision
+- Identity Secure Score baseline captured (8/18/2026) - to be tracked at each phase boundary
+- Lifecycle Workflows (Joiner/Mover/Leaver automation via Python/Graph API) designed but requires Entra ID Governance licence - architectural design documented
 
 - [x] **Phase 10 - Log Pipeline & Multi-Engine Analysis:** correlation across all sources
 
