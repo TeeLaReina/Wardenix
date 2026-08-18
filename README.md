@@ -169,13 +169,15 @@ Replaced Security Defaults with six scoped CA policies for the 6 P2-licensed acc
 
 ![PIM eligible assignments - Wale and Mei](docs/screenshots/phase-7-pim-eligible-assignments.png)
 
-Just-in-time privileged access replacing standing admin rights for both IT Admin accounts.
+Just-in-time privileged access replaced standing admin rights for both IT Admin accounts. It was then extended to group membership via PIM for Groups.
 
 - Wale Ibrahim: Identity Governance Administrator (eligible) - approver: Mei Chen
 - Mei Chen: Cloud Device Administrator (eligible) - approver: Wale Ibrahim
 - Role settings: 1-hour max activation, Azure MFA required, justification required, approval required
-- Activation workflow validated end-to-end: request → MFA → peer approval → time-bound active role
-- Additional finding: CA-06 confirmed blocking sign-in from non-Entra-joined device (AADSTS9001011) - CA-06 set back to Report-only for testing window
+- Activation workflow validated end-to-end: request → MFA → peer approval → time-bound active role → auto-expiry confirmed
+- Additional finding: CA-06 confirmed blocking sign-in from non-Entra-joined device (AADSTS9001011)
+- PIM for Groups: Wardenix IT Admins PIM group onboarded - Wale and Mei eligible for group membership (static group, 1-year eligible, MFA + approval required)
+- Graph API PIM query script (identity/pim_query.py): queries eligible assignments and self-activation history via Microsoft Graph - confirmed returning 3 eligible assignments and 2 activation events with justifications
 
 - [x] **Phase 8 - Identity Protection:** risk detection and investigation
 
