@@ -150,16 +150,18 @@ Confirmed and documented the free-tier identity baseline active across all 26 ac
 
 Replaced Security Defaults with six scoped CA policies for the 6 P2-licensed accounts. Free-tier 20 users remain under Security Defaults.
 
-- KQL validated in Defender portal Advanced hunting: CA policy evaluation confirmed flowing — CA-01 visible in ConditionalAccessPolicies field per sign-in, ConditionalAccessStatus distribution queryable across 765 sign-in events
-- Detection queries committed: detections/phase-6-ca-kql-queries.md
 - CA-01: MFA required for IT Admins (Wale, Mei) on all resources
 - CA-02: MFA required for privileged users (David, Sofia, Ama) on all resources
 - CA-03: Legacy authentication blocked - Exchange ActiveSync and Other clients only
 - CA-04: MFA required for all 6 P2 users across all cloud apps
 - CA-05: MFA step-up on medium and high risk sign-ins (P2 Identity Protection signal)
 - CA-06: Entra-joined device required for IT Admin access - enforces DESKTOP-K8PDBGH as the only trusted endpoint
-- All policies validated in Report-only mode via What If tool before enabling
-- BreakGlass Admin excluded from every policy
+- All policies validated in Report-only mode via What If tool before enabling; BreakGlass Admin excluded from every policy
+- Additional finding: CA-06 confirmed blocking SOC PC (non-Entra-joined) with AADSTS9001011 - device trust enforced
+- KQL validated in Defender portal: CA-01 visible in ConditionalAccessPolicies field, MFA enforcement rate and CA status distribution queryable across sign-in events
+- Grafana Cloud connected to wardenix-sentinel via Azure Monitor (App Registration: wardenix-grafana) - Wardenix Security Operations dashboard live with 4 panels
+- Live findings: 54% MFA / 46% single-factor after PIM activation; CA policy status notApplied on SOC PC confirms CA-06 working correctly
+- Entra diagnostic settings streaming to wardenix-sentinel: SignInLogs, NonInteractiveUserSignInLogs, AuditLogs, RiskyUsers, UserRiskEvents
 
 - [x] **Phase 7 - Privileged Identity Management:** eligible roles, approval workflow
 
