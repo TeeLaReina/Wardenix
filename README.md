@@ -80,7 +80,7 @@ Every VM in this project runs on isolated virtual networking with no path back t
 
 #### Phase 3 — Management infrastructure, network detection, and SOAR
 
-![Wale Ibrahim's endpoint active in Wazuh dashboard](docs/screenshots/phase-3-wazuh-endpoint-active.png)
+![Wale Ibrahim's endpoint active in Wazuh dashboard](docs/screenshots/phase-3-wale-win10-endpoint-on-wazuh.png)
 
 Built the cloud management infrastructure — the detection and response platform
 everything in Phase 4 reports into.
