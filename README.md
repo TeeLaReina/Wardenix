@@ -185,14 +185,15 @@ Just-in-time privileged access replaced standing admin rights for both IT Admin 
 
 ![Risk detections - Anonymous IP and Malicious IP, High severity](docs/screenshots/phase-8-risk-detections-tor.png)
 
-Simulated a real attack using Tor Browser, triggered two High-risk detections, investigated across all ID Protection reports, and remediated.
+Configured risk-based CA, simulated Tor browser attack, investigated detections across all ID Protection reports, remediated, and documented the full investigation workflow.
 
-- Tor Browser sign-in attempt as Wale Ibrahim triggered two simultaneous High-risk detections: Anonymous IP address and Malicious IP address
-- Microsoft threat intelligence identified the Tor exit node as actively malicious - not just anonymous
-- Smart lockout fired before password entry (error 50053) - account locked at network layer
-- Wale flagged in Risky users: At risk, High (3.57% of 26-user org)
-- CA-05 (MFA on risky sign-ins) confirmed in scope - would have challenged MFA had sign-in completed
-- Remediation: Confirm user safe in ID Protection, sessions revoked, risk state cleared
+- CA-05: MFA step-up on medium/high risk sign-ins (Phase 6)
+- CA-07: Require risk remediation (MFA + password change) on high user risk - added Phase 8
+- Attack simulation: Tor browser sign-in as Wale Ibrahim triggered Anonymous IP + Malicious IP detections simultaneously - smart lockout fired before password entry (error 50053)
+- 12 risk events captured in AADUserRiskEvents (Log Analytics) from second Tor session - realtime detection confirmed
+- Investigation workflow documented: Detect → Investigate → Decide → Remediate
+- KQL queries: risk events by type/level, high-risk users at risk, full risk column analysis
+- Grafana Identity Risk Events panel confirmed live with 12 events from Tor simulation
 
 - [x] **Phase 9 - Identity Governance:** Access Reviews, Entitlement Management
 
