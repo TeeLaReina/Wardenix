@@ -214,7 +214,7 @@ Recurring oversight layer - access reviews, entitlement management, terms of use
 
 #### Phase 10 - Log Pipeline & Multi-Engine Analysis
 
-![Wazuh alerts in Log Analytics - SSH brute force and memory pressure detected](docs/screenshots/phase-10-grafana-wazuh-alerts-panel.png)
+![Wardenix Security Operations dashboard — 8 panels across all detection layers](docs/screenshots/phase-10-grafana-dashboard-full.png)
 
 Three detection engines were unified into wardenix-sentinel Log Analytics workspace - Entra ID, Wazuh, and Defender XDR all queryable via KQL and visualized in Grafana.
 

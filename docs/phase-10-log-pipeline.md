@@ -127,3 +127,4 @@ automatically via the diagnostic settings pipeline.
 - docs/screenshots/phase-10-kql-consent-grants.png
 - docs/screenshots/phase-10-wazuh-sentinel-forwarder-output.png
 - docs/screenshots/phase-10-grafana-wazuh-alerts-panel.png
+- docs/screenshots/phase-10-grafana-dashboard-full.png
