@@ -214,14 +214,17 @@ Recurring oversight layer - access reviews, entitlement management, terms of use
 
 #### Phase 10 - Log Pipeline & Multi-Engine Analysis
 
-![Sign-in pipeline volume - 479 events across 5 hourly buckets](docs/screenshots/phase-10-kql-signin-pipeline-volume.png)
+![Wazuh alerts in Log Analytics - SSH brute force and memory pressure detected](docs/screenshots/phase-10-grafana-wazuh-alerts-panel.png)
 
-Microsoft Sentinel deployed on Azure Log Analytics, connected to the Defender portal, with Entra ID sign-in telemetry confirmed flowing and queryable via KQL.
+Three detection engines were unified into wardenix-sentinel Log Analytics workspace - Entra ID, Wazuh, and Defender XDR all queryable via KQL and visualized in Grafana.
 
-- Log Analytics workspace wardenix-sentinel deployed in East US, attached to Defender portal as primary workspace
-- Microsoft Defender XDR connector auto-configured on Defender portal onboarding - includes Entra ID Protection, Defender for Identity, Defender for Endpoint
-- KQL validated: 479 sign-in events in 24h window, spike of 349 events at 23:00 UTC during Phase 6-9 build activity
-- Architectural note: Sentinel deployed after Phase 8 attack simulation - risky sign-in confirmed in Entra ID Protection but predates pipeline; documented as sequencing constraint
+- Entra ID diagnostic settings streaming 5 log types to wardenix-sentinel: SignInLogs, NonInteractiveUserSignInLogs, AuditLogs, AADRiskyUsers, AADUserRiskEvents, and ManagedIdentitySignInLogs
+- Defender XDR connector auto-configured on Sentinel → Defender portal onboarding
+- Wazuh → Log Analytics forwarder (infra/wazuh_to_sentinel.py): reads alerts.json, posts via HTTP Data Collector API, and cron every 15 minutes - WazuhAlerts_CL table confirmed populated
+- Wazuh infrastructure fix: indexer OOM-killed July 25, fixed with 512m heap + 2GB swap; API password reset via rbac.db werkzeug scrypt
+- Grafana Cloud dashboard (Wardenix Security Operations): 8 panels - MFA Enforcement Rate, CA Policy Distribution, Risky Events, PIM Role Activations, Impossible Travel, PIM Activation Anomalies, Mass Consent Grants, Wazuh Alerts (Endpoint & Network Detection)
+- KQL detection queries: impossible travel, PIM activation anomalies, stale access, mass consent grants, Wazuh alert triage
+- Real detections in pipeline: SSH brute force (rule 5710, level 5), memory pressure (rule 5108, level 12)
 
 - [ ] **Phase 11 - SOAR + AI-Assisted Response:** automated playbook, incident narrative
 
